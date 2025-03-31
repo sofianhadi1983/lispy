@@ -18,7 +18,7 @@ $(TARGET): $(SRC)
 
 # Clean build files
 clean:
-	rm -f $(TARGET)
+	rm -f $(TARGET) && clear
 
 # Phony targets
 .PHONY: all clean
