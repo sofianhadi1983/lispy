@@ -1,15 +1,16 @@
 #include <stdio.h>
-
-static char input[2048];
+#include <stdlib.h>
+#include <editline/readline.h>
 
 int main(int argc, char** argv) {
     puts("Lispy versi 0.0.1");
     puts("Tekan CTRL+C untuk keluar\n");
 
     while(1) {
-        fputs("lispy> ", stdout);
-        fgets(input, 2048, stdin);
+        char* input = readline("Lispy> ");
+        add_history(input);
         printf("Nama Anda adalah %s", input);
+        free(input);
     }
 
     return 0;
