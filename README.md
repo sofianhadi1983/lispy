@@ -34,7 +34,6 @@ di sistem operasi `Linux` bisa diinstall menggunakan perintah berikut:
 sudo apt-get install libedit-dev
 ```
 
-
 jika menyertakan pustaka `mpc`, maka perintahnya menjadi berikut:
 `Linux dan Mac`
 ```
@@ -44,4 +43,10 @@ cc -std=c99 -Wall parsing.c mpc.c -ledit -lm -o parsing.out
 `Windows`
 ```
 cc -std=c99 -Wall parsing.c mpc.c -o parsing
+```
+
+atau cukup menggunakan perintah
+```
+make # untuk build project
+make clean # untuk menghapus executable hasil kompilasi
 ```
