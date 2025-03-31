@@ -16,6 +16,11 @@ khusus di sistem operasi `Mac OS`, hanya perlu memasukan satu pustaka saja karen
 ```
 ## Cara kompilasi
 ```
-cc -std=c99 -Wall main.c -o main -ledit
+cc -std=c99 -Wall main.c -o main.out -ledit
 ```
 flag `-ledit` menginstruksikan kompiler untuk memakai pustaka `libedit` yang mengandung dua perintah yang dibutuhkan oleh `main.c` yaitu `readline` dan `add_history`.
+
+di sistem operasi `Linux` bisa diinstall menggunakan perintah berikut:
+```
+sudo apt-get install libedit-dev
+```
