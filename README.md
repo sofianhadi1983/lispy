@@ -23,7 +23,7 @@ curl -O https://raw.githubusercontent.com/orangeduck/mpc/refs/heads/master/mpc.c
 
 deklarasikan `mpc` dengan statement `#include "mpc.h"`.
 
-## Cara kompilasi
+## Cara kompilasi dan run
 ```
 cc -std=c99 -Wall main.c -o main.out -ledit
 ```
@@ -48,7 +48,25 @@ cc -std=c99 -Wall parsing.c mpc.c -o parsing
 atau cukup menggunakan perintah
 ```
 make # untuk build project
+./parsing.out # untuk run lispy
 make clean # untuk menghapus executable hasil kompilasi
+```
+
+tampilan akan seperti ini:
+```
+user@Users-MacBook-Pro lispy % ./parsing.out 
+Lispy versi 0.0.1
+Tekan CTRL+C untuk keluar
+
+>>> + 1 2 6
+9
+>>> + 6 (* 2 9)
+24
+>>> / (* 10 2) (+ 4 2)
+3
+>>> modulo 10 3
+1
+>>> 
 ```
 
 ## Cara mendefinisikan grammar
