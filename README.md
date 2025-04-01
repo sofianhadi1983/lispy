@@ -50,3 +50,6 @@ atau cukup menggunakan perintah
 make # untuk build project
 make clean # untuk menghapus executable hasil kompilasi
 ```
+
+## Cara mendefinisikan grammar
+Tulis grammar di file `lispy.grammar`. 

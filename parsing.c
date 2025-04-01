@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "mpc.h"
 
 /* jika menggunakan macOS */
@@ -14,6 +15,7 @@
 int  number_of_nodes(mpc_ast_t* t);
 long eval_op(long x, char* op, long y);
 long eval(mpc_ast_t* t);
+mpc_err_t* readGrammar(mpc_parser_t* Number, mpc_parser_t* Operator, mpc_parser_t* Expr, mpc_parser_t* Lispy);
 
 int main(int argc, char** argv) {
     mpc_parser_t* Number    = mpc_new("number");
@@ -21,14 +23,14 @@ int main(int argc, char** argv) {
     mpc_parser_t* Expr      = mpc_new("expr");
     mpc_parser_t* Lispy     = mpc_new("lispy");
 
-    mpca_lang(MPCA_LANG_DEFAULT,
-        "                                                                                              \
-           number   : /-?[0-9]+/ ;                                                                     \
-           operator : '+' | '-' | '*' | '/' | '%' | /tambah/ | /kurang/ | /kali/ | /bagi/ | /modulo/;  \
-           expr     : <number> | '(' <operator> <expr>+ ')' ;                                          \
-           lispy    :  /^/ <operator> <expr>+ /$/ ;                                                    \
-        ", 
-        Number, Operator, Expr, Lispy);
+    mpc_err_t* err = readGrammar(Number, Operator, Expr, Lispy);
+    
+    if (err != NULL) {
+        mpc_err_print(err);
+        mpc_err_delete(err);
+        mpc_cleanup(4, Number, Operator, Expr, Lispy);
+        return 1;
+    }
         
     puts("Lispy versi 0.0.1");
     puts("Tekan CTRL+C untuk keluar\n");
@@ -74,6 +76,18 @@ long eval_op(long x, char* op, long y) {
     if (strcmp(op, "*") == 0 || strcmp(op, "kali") == 0) return x * y;
     if (strcmp(op, "%") == 0 || strcmp(op, "modulo") == 0) return x % y;
     return 0;
+}
+
+mpc_err_t* readGrammar(
+    mpc_parser_t* Number, 
+    mpc_parser_t* Operator, 
+    mpc_parser_t* Expr,
+    mpc_parser_t* Lispy) {
+        
+    return mpca_lang_contents(
+        MPCA_LANG_DEFAULT, 
+        "lispy.grammar", 
+        Number, Operator, Expr, Lispy);
 }
 
 long eval(mpc_ast_t* t) {
