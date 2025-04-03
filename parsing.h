@@ -31,6 +31,15 @@ mpc_err_t* readGrammar(
     mpc_parser_t* Expr, 
     mpc_parser_t* Lispy);
 
+typedef struct {
+    int type;
+    long num;
+    int err;
+} lval;
+
+enum { LVAL_NUM, LVAL_ERR };
+enum { LERR_DIV_ZERO, LERR_BAD_OP, LERR_BAD_NUM };
+
 #ifdef __cplusplus
 }
 #endif
